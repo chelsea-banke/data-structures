@@ -11,9 +11,17 @@ function arrayManipulation(n, queries) {
     // Write your code here
     let arr = new Array(n).fill(0)
     for(let i=0; i<queries.length; i++){
-        for(let j=queries[i][0]-1; j<queries[i][1]; j++){
-            arr[j]+=queries[i][2]
-        }
+        arr[queries[i][0]-1] += queries[i][2]
+        arr[queries[i][1]] -= queries[i][2]
     }
-    return Math.max(...arr)
+    let max = 0
+    let current = 0
+    for(let i=0; i<n; i++){
+        arr[i] += current
+        current = arr[i]
+        if(current > max){
+            max = current
+        } 
+    }
+    return max
 }
